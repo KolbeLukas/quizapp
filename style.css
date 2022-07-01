@@ -1,12 +1,16 @@
 body {
     background-color: rgb(254, 250, 239);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
 }
 
-.nav-bg {
+.rubik {
+    font-family: 'Rubik';
+}
+
+.pt-sans {
+    font-family: 'PT Sans';
+}
+
+.nav-left {
     background-color: rgb(39, 53, 92);
 }
 
@@ -30,8 +34,26 @@ body {
     min-height: 500px;
 }
 
+.min-width {
+    min-width: 800px;
+}
+
 .main-bg {
     background-image: url(img/brainbg.jpg);
-    background-size: contain;
+    background-size: cover;
     background-position: center;
+}
+
+.mw-50 {
+    max-width: 50%;
+}
+
+.radius-right {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.radius-left {
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
 }

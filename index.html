@@ -8,13 +8,14 @@
     <title>Quizapp</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fonts.css">
     <script src="script.js"></script>
 </head>
 
-<body>
-    <div class="card mb-3">
-        <div class="row g-0 min-height">
-            <div class="col-md-4 nav-bg w-25 py-3 rounded-start">
+<body class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card mb-3 radius-right radius-left">
+        <div class="row g-0 min-height min-width">
+            <div class="col-md-4 nav-left w-25 py-3 radius-left rubik">
                 <div class="mb-4 d-flex justify-content-center">
                     <img class="main-img" src="img/logo.png">
                 </div>
@@ -30,13 +31,14 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-8 main-bg w-75">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="col-md-8 main-bg w-75 d-flex flex-column align-items-center radius-right">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
+                    <h4 class="card-title text-center fw-bold pt-sans">Willkommen zu dem tollen HTML Quiz</h4>
+                    <p class="card-text pt-sans">Bist du bereit für die Herausforderung?</p>
                 </div>
+                <div class="w-100 d-flex justify-content-end pb-5 pe-5">
+                <button>LOS GEHT'S</button>
+            </div>
             </div>
         </div>
     </div>
