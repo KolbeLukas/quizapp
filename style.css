@@ -79,3 +79,13 @@ a {
 .active {
     border-left: 3px solid white;
 }
+
+.bg-badge {
+    background-color: rgb(215, 215, 215);
+}
+ .badge {
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 9px 12px 9px 12px;
+ }

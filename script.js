@@ -90,8 +90,9 @@ function loadHTMLQuiz() {
 }
 
 
-function loadQuestins() {
-
+function loadQuestions() {
+    document.getElementById('quiz-content').classList.remove('main-bg');
+    document.getElementById('quiz-content').innerHTML = renderHTMLQuizQuestions();
 }
 
 
@@ -104,9 +105,37 @@ function renderHTMLQuizStart() {
             <p class="card-text pt-sans">Bist du bereit 10 interessante Fragen?</p>
         </div>
         <div class="w-100 d-flex justify-content-end pb-5 pe-5">
-            <button onclick="loadQuestins()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
+            <button onclick="loadQuestions()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
                 <span class="pe-3">LOS GEHT'S</span>
                 <img src="img/next.png">
             </button>
+        </div>`;
+}
+
+
+function renderHTMLQuizQuestions() {
+    return /*html*/`
+        <div class="card-body d-flex flex-column justify-content-center align-items-center w-100">
+            <h4 class="card-title text-center fw-bold pt-sans mb-4">Frage?</h4>
+            <div class="card mb-3 w-75">
+                <div class="card-body p-2">
+                    <span class="badge bg-badge me-4">A</span>Antwort 1
+                </div>
+            </div>
+            <div class="card mb-3 w-75">
+                <div class="card-body p-2">
+                    <span class="badge bg-badge me-4">B</span>Antwort 2
+                </div>
+            </div>
+            <div class="card mb-3 w-75">
+                <div class="card-body p-2">
+                    <span class="badge bg-badge me-4">C</span>Antwort 3
+                </div>
+            </div>
+            <div class="card mb-3 w-75">
+                <div class="card-body p-2">
+                    <span class="badge bg-badge me-4">D</span>Antwort 4
+                </div>
+            </div>
         </div>`;
 }
