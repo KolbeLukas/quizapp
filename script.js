@@ -116,25 +116,29 @@ function renderHTMLQuizStart() {
 function renderHTMLQuizQuestions() {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center w-100">
-            <h4 class="card-title text-center fw-bold pt-sans mb-4">Frage?</h4>
+            <h4 class="card-title text-center fw-medium rubik mb-4">Frage?</h4>
             <div class="card mb-3 w-75">
                 <div class="card-body p-2">
-                    <span class="badge bg-badge me-4">A</span>Antwort 1
+                    <span class="badge bg-badge me-4">A</span>
+                    <span class="rubik">Antwort 1</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
                 <div class="card-body p-2">
-                    <span class="badge bg-badge me-4">B</span>Antwort 2
+                    <span class="badge bg-badge me-4">B</span>
+                    <span class="rubik">Antwort 2</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
                 <div class="card-body p-2">
-                    <span class="badge bg-badge me-4">C</span>Antwort 3
+                    <span class="badge bg-badge me-4">C</span>
+                    <span class="rubik">Antwort 3</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
                 <div class="card-body p-2">
-                    <span class="badge bg-badge me-4">D</span>Antwort 4
+                    <span class="badge bg-badge me-4">D</span>
+                    <span class="rubik">Antwort 4</span>
                 </div>
             </div>
         </div>`;

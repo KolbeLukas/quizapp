@@ -13,35 +13,41 @@
     <script src="script.js"></script>
 </head>
 
-<body class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card mb-3 radius-right radius-left">
-        <div class="row g-0 min-height min-width">
-            <div class="col-md-4 nav-left w-25 py-3 radius-left rubik">
-                <div class="mb-5 d-flex justify-content-center">
-                    <img class="main-img" src="img/logo.png">
+<body>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100"></div>
+    </div>
+    <main class="d-flex justify-content-center align-items-center min-h-100">
+        <div class="card mb-3 radius-right radius-left">
+            <div class="row g-0 min-height min-width">
+                <div class="col-md-4 nav-left w-25 py-3 radius-left rubik">
+                    <div class="mb-5 d-flex justify-content-center">
+                        <img class="main-img" src="img/logo.png">
+                    </div>
+                    <ul class="nav flex-column">
+                        <li id="html-quiz-link-box" class="nav-item ps-3 inactive">
+                            <a id="html-quiz-link" class="nav-link link-light fw-light" aria-current="page"
+                                onclick="loadHTMLQuiz()">HTML</a>
+                        </li>
+                        <li class="nav-item ps-3 inactive">
+                            <a class="nav-link link-light fw-light">Link</a>
+                        </li>
+                        <li class="nav-item ps-3 inactive">
+                            <a class="nav-link link-light fw-light">Link</a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="nav flex-column">
-                    <li id="html-quiz-link-box" class="nav-item ps-3 inactive">
-                        <a id="html-quiz-link" class="nav-link link-light fw-light" aria-current="page"
-                            onclick="loadHTMLQuiz()">HTML</a>
-                    </li>
-                    <li class="nav-item ps-3 inactive">
-                        <a class="nav-link link-light fw-light">Link</a>
-                    </li>
-                    <li class="nav-item ps-3 inactive">
-                        <a class="nav-link link-light fw-light">Link</a>
-                    </li>
-                </ul>
-            </div>
-            <div id="quiz-content" class="col-md-8 main-bg w-75 d-flex flex-column align-items-center radius-right">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
-                    <h4 class="card-title text-center fw-bold pt-sans">Willkommen in meiner Quizapp</h4>
-                    <p class="card-text pt-sans">Bist du bereit für die Herausforderung?</p>
-                    <p class="card-text pt-sans">Dann wähle links ein Quiz aus.</p>
+                <div id="quiz-content" class="col-md-8 main-bg w-75 d-flex flex-column align-items-center radius-right">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
+                        <h4 class="card-title text-center fw-bold pt-sans">Willkommen in meiner Quizapp</h4>
+                        <p class="card-text pt-sans">Bist du bereit für die Herausforderung?</p>
+                        <p class="card-text pt-sans">Dann wähle links ein Quiz aus.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
