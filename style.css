@@ -18,18 +18,6 @@ body {
     height: 60px;
 }
 
-.nav-item {
-    border-left: 3px solid transparent;
-}
-
-.nav-item:hover {
-    border-left: 3px solid white;
-}
-
-.active {
-    border-left: 3px solid white;
-}
-
 .min-height {
     min-height: 500px;
 }
@@ -66,4 +54,28 @@ body {
 .btn-primary:hover {
     background-color: rgb(255, 78, 16, 0.7);
     border-color: transparent;
+}
+
+.btn-primary:focus {
+    background-color: rgb(255, 78, 16);
+    border-color: transparent;
+    box-shadow: 0 0 0 0.25rem rgb(255, 78, 16, 0.5);
+}
+
+a {
+    cursor: pointer;
+}
+
+.inactive {
+    opacity: 0.6;
+    border-left: 3px solid transparent;
+}
+
+.inactive:hover {
+    opacity: 1;
+    border-left: 3px solid white;
+}
+
+.active {
+    border-left: 3px solid white;
 }

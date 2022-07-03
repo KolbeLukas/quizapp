@@ -1,4 +1,4 @@
-let questions = [
+let questionsHTML = [
     {
         'question': 'Wie sehen HTML-Tags aus?',
         'answer_1': '>p<>/p<',
@@ -80,3 +80,33 @@ let questions = [
         'right_answer': 1
     }
 ];
+
+
+function loadHTMLQuiz() {
+    document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
+    document.getElementById('html-quiz-link-box').classList.add('active');
+    document.getElementById('html-quiz-link-box').classList.remove('inactive');
+    document.getElementById('html-quiz-link').classList.remove('fw-light');
+}
+
+
+function loadQuestins() {
+
+}
+
+
+/* HTML Rendering */
+
+function renderHTMLQuizStart() {
+    return /*html*/`
+        <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
+            <h4 class="card-title text-center fw-bold pt-sans">Das HTML Quiz</h4>
+            <p class="card-text pt-sans">Bist du bereit 10 interessante Fragen?</p>
+        </div>
+        <div class="w-100 d-flex justify-content-end pb-5 pe-5">
+            <button onclick="loadQuestins()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
+                <span class="pe-3">LOS GEHT'S</span>
+                <img src="img/next.png">
+            </button>
+        </div>`;
+}
