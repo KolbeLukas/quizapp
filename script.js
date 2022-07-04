@@ -1,4 +1,4 @@
-let questionsHTML = [
+let HTMLQuiz = [
     {
         'question': 'Wie sehen HTML-Tags aus?',
         'answer_1': '>p<>/p<',
@@ -100,10 +100,29 @@ function startHTMLQuiz() {
 
 
 function loadQuestionAndAnswers(currentQuestion) {
-    let question = questionsHTML[currentQuestion];
+    let quiz = 'HTMLQuiz';
+    let question = HTMLQuiz[currentQuestion];
 
-    document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(question);
-    document.getElementById('max-amount-questions').innerHTML = questionsHTML.length;
+    document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(quiz, question);
+    document.getElementById('max-amount-questions').innerHTML = HTMLQuiz.length;
+}
+
+
+function answer(quiz, selection) {
+    eval(quiz);
+    let question = quiz[currentQuestion]
+    console.log('answer', selection);
+    let selctedAnswerNumber = selection.slice(-1);
+    console.log('richtig ist', question['right_answer']);
+    console.log('Antwort ausgewählt', selctedAnswerNumber);
+
+    if (selctedAnswerNumber == question['right_answer']){
+        console.log('Richtig')
+        document.getElementById(selection).classList.add('bg-success');
+    } else {
+        console.log('Falsch')
+        document.getElementById(selection).classList.add('bg-danger');
+    }
 }
 
 
@@ -124,30 +143,30 @@ function renderHTMLQuizStart() {
 }
 
 
-function renderQuestionAndAnswers(question) {
+function renderQuestionAndAnswers(quiz, question) {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center w-100">
             <h4 class="card-title text-center fw-medium rubik mb-4">${question['question']}</h4>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2 answer-hover" onclick="answer('answer_1')">
+                <div class="card-body p-2 answer-hover" id="answer_1" onclick="answer(${quiz}, 'answer_1')">
                     <span class="badge bg-badge me-4">A</span>
                     <span class="rubik">${question['answer_1']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2 answer-hover" onclick="answer('answer_2')">
+                <div class="card-body p-2 answer-hover" id="answer_2" onclick="answer(${quiz}, 'answer_2')">
                     <span class="badge bg-badge me-4">B</span>
                     <span class="rubik">${question['answer_2']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2 answer-hover" onclick="answer('answer_3')">
+                <div class="card-body p-2 answer-hover" id="answer_3" onclick="answer(${quiz}, 'answer_3')">
                     <span class="badge bg-badge me-4">C</span>
                     <span class="rubik">${question['answer_3']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2 answer-hover" onclick="answer('answer_4')">
+                <div class="card-body p-2 answer-hover" id="answer_4" onclick="answer(${quiz}, 'answer_4')">
                     <span class="badge bg-badge me-4">D</span>
                     <span class="rubik">${question['answer_4']}</span>
                 </div>
