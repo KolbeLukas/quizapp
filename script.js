@@ -2,9 +2,9 @@ let questionsHTML = [
     {
         'question': 'Wie sehen HTML-Tags aus?',
         'answer_1': '>p<>/p<',
-        'answer_2': '<p></p>',
-        'answer_3': '<<p>><</p>>',
-        'answer_4': '<p Hallo mein Text/p>',
+        'answer_2': '&lt;p&gt;&lt;/p&gt;',
+        'answer_3': '<&lt;p&gt;><&lt;/p&gt;>',
+        'answer_4': '&lt;p Hallo mein Text/p&gt;',
         'right_answer': 2
     },
     {
@@ -82,7 +82,10 @@ let questionsHTML = [
 ];
 
 
-function loadHTMLQuiz() {
+let currentQuestion = 0;
+
+
+function loadHTMLQuizStart() {
     document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
     document.getElementById('html-quiz-link-box').classList.add('active');
     document.getElementById('html-quiz-link-box').classList.remove('inactive');
@@ -90,9 +93,17 @@ function loadHTMLQuiz() {
 }
 
 
-function loadQuestions() {
+function startHTMLQuiz() {
     document.getElementById('quiz-content').classList.remove('main-bg');
-    document.getElementById('quiz-content').innerHTML = renderHTMLQuizQuestions();
+    loadQuestionAndAnswers(currentQuestion);
+}
+
+
+function loadQuestionAndAnswers(currentQuestion) {
+    let question = questionsHTML[currentQuestion];
+
+    document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(question);
+    document.getElementById('max-amount-questions').innerHTML = questionsHTML.length;
 }
 
 
@@ -105,7 +116,7 @@ function renderHTMLQuizStart() {
             <p class="card-text pt-sans">Bist du bereit 10 interessante Fragen?</p>
         </div>
         <div class="w-100 d-flex justify-content-end pb-5 pe-5">
-            <button onclick="loadQuestions()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
+            <button onclick="startHTMLQuiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
                 <span class="pe-3">LOS GEHT'S</span>
                 <img src="img/next.png">
             </button>
@@ -113,33 +124,39 @@ function renderHTMLQuizStart() {
 }
 
 
-function renderHTMLQuizQuestions() {
+function renderQuestionAndAnswers(question) {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center w-100">
-            <h4 class="card-title text-center fw-medium rubik mb-4">Frage?</h4>
+            <h4 class="card-title text-center fw-medium rubik mb-4">${question['question']}</h4>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2">
+                <div class="card-body p-2 answer-hover" onclick="answer('answer_1')">
                     <span class="badge bg-badge me-4">A</span>
-                    <span class="rubik">Antwort 1</span>
+                    <span class="rubik">${question['answer_1']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2">
+                <div class="card-body p-2 answer-hover" onclick="answer('answer_2')">
                     <span class="badge bg-badge me-4">B</span>
-                    <span class="rubik">Antwort 2</span>
+                    <span class="rubik">${question['answer_2']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2">
+                <div class="card-body p-2 answer-hover" onclick="answer('answer_3')">
                     <span class="badge bg-badge me-4">C</span>
-                    <span class="rubik">Antwort 3</span>
+                    <span class="rubik">${question['answer_3']}</span>
                 </div>
             </div>
             <div class="card mb-3 w-75">
-                <div class="card-body p-2">
+                <div class="card-body p-2 answer-hover" onclick="answer('answer_4')">
                     <span class="badge bg-badge me-4">D</span>
-                    <span class="rubik">Antwort 4</span>
+                    <span class="rubik">${question['answer_4']}</span>
                 </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center w-75">
+                <span><b>1</b> von <b id="max-amount-questions"></b> Fragen</span>
+                <button class="btn btn-primary ps-3 pe-3 d-flex align-items-center radius-left radius-right">
+                <span>Nächste Frage</span>
+                </button>
             </div>
         </div>`;
 }
