@@ -83,13 +83,23 @@ let HTMLQuiz = [
 
 
 let currentQuestion = 0;
+let rightAnswers = 0;
 
+/* HTML-QUIZ FUNCTIONS */
 
 function loadHTMLQuizStart() {
-    document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
-    document.getElementById('html-quiz-link-box').classList.add('active');
-    document.getElementById('html-quiz-link-box').classList.remove('inactive');
-    document.getElementById('html-quiz-link').classList.remove('fw-light');
+    if (currentQuestion == 0) {
+        document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
+        document.getElementById('html-quiz-link-box').classList.add('active');
+        document.getElementById('html-quiz-link-box').classList.remove('inactive');
+        document.getElementById('html-quiz-link').classList.remove('fw-light');
+        resetProgress();
+    } else {
+        console.log('stop')
+        document.getElementById('alert').classList.remove('d-none');
+        document.getElementById('end-quiz').setAttribute('onclick','endHTMLQuiz()');
+        document.getElementById('move-on').setAttribute('onclick','closeAlert()');
+    }
 }
 
 
@@ -97,17 +107,41 @@ function startHTMLQuiz() {
     let quizString = 'HTMLQuiz';
     let quiz = HTMLQuiz;
 
+    currentQuestion = 0;
+    rightAnswers = 0;
     document.getElementById('quiz-content').classList.remove('main-bg');
     loadQuestionAndAnswers(quizString, quiz);
 }
 
 
+function endHTMLQuiz() {
+    console.log('ende')
+    currentQuestion = 0;
+    rightAnswers = 0;
+    loadHTMLQuizStart();
+    document.getElementById('alert').classList.add('d-none');
+}
+
+
+/* FUNCTIONS FOR ALL QUIZ */
+
 function loadQuestionAndAnswers(quizString, quiz) {
+    let progress = (currentQuestion / quiz.length) * 100;
+
+    progress = Math.round(progress);
     if (currentQuestion >= quiz.length) {
-        document.getElementById('quiz-content').innerHTML = renderScoreWindow();
+        // Show End Screen
+        document.getElementById('progress-bar').innerHTML = `${progress}%`;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+        document.getElementById('quiz-content').innerHTML = renderEndScoreScreen();
         document.getElementById('max-amount-questions-score').innerHTML = quiz.length;
+        document.getElementById('right-answer-score').innerHTML = rightAnswers;
     } else {
+        // Show Next Question
         let quizdata = quiz[currentQuestion];
+
+        document.getElementById('progress-bar').innerHTML = `${progress}%`;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
         document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(quizString, quizdata);
         document.getElementById('max-amount-questions').innerHTML = quiz.length;
         document.getElementById('current-question-number').innerHTML = currentQuestion + 1;
@@ -122,10 +156,12 @@ function answer(quizString, selection) {
 
     if (selctedAnswerNumber == question['right-answer']) {
         document.getElementById(selection).classList.add('bg-success');
+        rightAnswers++;
     } else {
         document.getElementById(selection).classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).classList.add('bg-success');
     }
+    disableAnswers();
     document.getElementById('next-question').disabled = false;
 }
 
@@ -134,6 +170,26 @@ function nextQuestion(quizString) {
     currentQuestion++;
     let quiz = eval(quizString);
     loadQuestionAndAnswers(quizString, quiz);
+}
+
+
+function disableAnswers() {
+    document.getElementById('answer-1').classList.add('pe-none');
+    document.getElementById('answer-2').classList.add('pe-none');
+    document.getElementById('answer-3').classList.add('pe-none');
+    document.getElementById('answer-4').classList.add('pe-none');
+}
+
+
+function resetProgress() {
+    let progress = 0;
+    document.getElementById('progress-bar').innerHTML = `${progress}%`;
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+}
+
+
+function closeAlert() {
+    document.getElementById('alert').classList.add('d-none');
 }
 
 
@@ -192,16 +248,22 @@ function renderQuestionAndAnswers(quizString, question) {
 }
 
 
-function renderScoreWindow() {
+function renderEndScoreScreen() {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <img src="img/brain-result.png" class="w-50 mb-5">
             <h4 class="card-title text-center fw-bold rubik w-50 mb-5">COMPLETE HTML QUIZ</h4>
             <p class="card-text fw-bold fs-5 rubik d-flex justify-content-between w-75">
                 <span class="score-color fw-bold">DEIN SCORE </span>
-                <span><b>10</b>/<b id="max-amount-questions-score"></b></span>
+                <span><b id="right-answer-score"></b>/<b id="max-amount-questions-score"></b></span>
             </p>
             <p class="card-text rubik">Wähle links ein weiters Quiz aus.</p>
             <img class="position-absolute end-0 h-50" src="img/tropy.png">
         </div>`;
+}
+
+
+function renderWarningOverlay() {
+    return /*html*/`
+    `;
 }

@@ -15,8 +15,8 @@
 
 <body>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
+        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%">
+        </div>
     </div>
     <main class="d-flex justify-content-center align-items-center h-100">
         <div class="card mb-3 radius-right radius-left w-75 h-75 mw-800 mh-600">
@@ -45,6 +45,14 @@
                         <p class="card-text pt-sans text-center">Dann wähle links ein Quiz aus.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="alert" class="alert alert-danger d-none position-absolute d-flex flex-column align-items-center" role="alert">
+            <span>Willst du das Quiz wirklich verlassen?</span>
+            <span>Dein Fortschritt geht dann leider verloren!</span>
+            <div class="mt-4">
+                <button id="end-quiz" class="btn btn-secondary">Beenden</button>
+                <button id="move-on" class="btn btn-secondary">Weiter machen</button>
             </div>
         </div>
     </main>
