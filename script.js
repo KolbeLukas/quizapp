@@ -84,22 +84,30 @@ let HTMLQuiz = [
 
 let currentQuestion = 0;
 let rightAnswers = 0;
+let audioRightAnswer = new Audio('audio/success.wav');
+let audioWrongAnswer = new Audio('audio/wrong.wav');
+
 
 /* HTML-QUIZ FUNCTIONS */
 
 function loadHTMLQuizStart() {
-    if (currentQuestion == 0) {
+    let quizNotStarted = (currentQuestion == 0);
+    if (quizNotStarted) {
+        setHTMLLinkActive();
         document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
-        document.getElementById('html-quiz-link-box').classList.add('active');
-        document.getElementById('html-quiz-link-box').classList.remove('inactive');
-        document.getElementById('html-quiz-link').classList.remove('fw-light');
-        resetProgress();
     } else {
-        console.log('stop')
+        // open reset alert
         document.getElementById('alert').classList.remove('d-none');
         document.getElementById('end-quiz').setAttribute('onclick','endHTMLQuiz()');
         document.getElementById('move-on').setAttribute('onclick','closeAlert()');
     }
+}
+
+
+function setHTMLLinkActive (){
+    document.getElementById('html-quiz-link-box').classList.add('active');
+    document.getElementById('html-quiz-link-box').classList.remove('inactive');
+    document.getElementById('html-quiz-link').classList.remove('fw-light');
 }
 
 
@@ -115,36 +123,26 @@ function startHTMLQuiz() {
 
 
 function endHTMLQuiz() {
-    console.log('ende')
     currentQuestion = 0;
     rightAnswers = 0;
     loadHTMLQuizStart();
     document.getElementById('alert').classList.add('d-none');
+    resetProgressBar();
 }
 
 
 /* FUNCTIONS FOR ALL QUIZ */
 
 function loadQuestionAndAnswers(quizString, quiz) {
-    let progress = (currentQuestion / quiz.length) * 100;
-
-    progress = Math.round(progress);
+    let progress = Math.round((currentQuestion / quiz.length) * 100);
+    let quizdata = quiz[currentQuestion];
+    
     if (currentQuestion >= quiz.length) {
-        // Show End Screen
-        document.getElementById('progress-bar').innerHTML = `${progress}%`;
-        document.getElementById('progress-bar').style.width = `${progress}%`;
-        document.getElementById('quiz-content').innerHTML = renderEndScoreScreen(quizString);
-        document.getElementById('max-amount-questions-score').innerHTML = quiz.length;
-        document.getElementById('right-answer-score').innerHTML = rightAnswers;
+        showEndScreen(quizString, quiz);
+        updateProgressBar(progress);
     } else {
-        // Show Next Question
-        let quizdata = quiz[currentQuestion];
-
-        document.getElementById('progress-bar').innerHTML = `${progress}%`;
-        document.getElementById('progress-bar').style.width = `${progress}%`;
-        document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(quizString, quizdata);
-        document.getElementById('max-amount-questions').innerHTML = quiz.length;
-        document.getElementById('current-question-number').innerHTML = currentQuestion + 1;
+        loadNextQuestionAndAnswers(quizString, quizdata, quiz);
+        updateProgressBar(progress);
     }
 }
 
@@ -156,20 +154,15 @@ function answer(quizString, selection) {
 
     if (selctedAnswerNumber == question['right-answer']) {
         document.getElementById(selection).classList.add('bg-success');
+        audioRightAnswer.play();
         rightAnswers++;
     } else {
         document.getElementById(selection).classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).classList.add('bg-success');
+        audioWrongAnswer.play();
     }
     disableAnswers();
     document.getElementById('next-question').disabled = false;
-}
-
-
-function nextQuestion(quizString) {
-    currentQuestion++;
-    let quiz = eval(quizString);
-    loadQuestionAndAnswers(quizString, quiz);
 }
 
 
@@ -181,7 +174,34 @@ function disableAnswers() {
 }
 
 
-function resetProgress() {
+function nextQuestion(quizString) {
+    currentQuestion++;
+    let quiz = eval(quizString);
+    loadQuestionAndAnswers(quizString, quiz);
+}
+
+
+function updateProgressBar(progress) {
+    document.getElementById('progress-bar').innerHTML = `${progress}%`;
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+}
+
+
+function loadNextQuestionAndAnswers(quizString, quizdata, quiz) {
+    document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(quizString, quizdata);
+    document.getElementById('max-amount-questions').innerHTML = quiz.length;
+    document.getElementById('current-question-number').innerHTML = currentQuestion + 1;
+}
+
+
+function showEndScreen(quizString, quiz) {
+    document.getElementById('quiz-content').innerHTML = renderEndScoreScreen(quizString);
+    document.getElementById('max-amount-questions-score').innerHTML = quiz.length;
+    document.getElementById('right-answer-score').innerHTML = rightAnswers;
+}
+
+
+function resetProgressBar() {
     let progress = 0;
     document.getElementById('progress-bar').innerHTML = `${progress}%`;
     document.getElementById('progress-bar').style.width = `${progress}%`;
@@ -196,6 +216,7 @@ function closeAlert() {
 function restartQuiz(quizString) {
     currentQuestion = 0;
     rightAnswers = 0;
+    resetProgressBar();
     let quiz = eval(quizString);
     loadQuestionAndAnswers(quizString, quiz);
 }

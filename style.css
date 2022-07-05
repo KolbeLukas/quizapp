@@ -6,7 +6,7 @@
     font-family: 'PT Sans';
 }
 
-.h-100 {
+.vh-100 {
     height: calc(100vh - 16px) !important;
 }
 
