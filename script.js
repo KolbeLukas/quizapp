@@ -133,7 +133,7 @@ function loadQuestionAndAnswers(quizString, quiz) {
         // Show End Screen
         document.getElementById('progress-bar').innerHTML = `${progress}%`;
         document.getElementById('progress-bar').style.width = `${progress}%`;
-        document.getElementById('quiz-content').innerHTML = renderEndScoreScreen();
+        document.getElementById('quiz-content').innerHTML = renderEndScoreScreen(quizString);
         document.getElementById('max-amount-questions-score').innerHTML = quiz.length;
         document.getElementById('right-answer-score').innerHTML = rightAnswers;
     } else {
@@ -193,6 +193,14 @@ function closeAlert() {
 }
 
 
+function restartQuiz(quizString) {
+    currentQuestion = 0;
+    rightAnswers = 0;
+    let quiz = eval(quizString);
+    loadQuestionAndAnswers(quizString, quiz);
+}
+
+
 /* HTML Rendering */
 
 function renderHTMLQuizStart() {
@@ -248,7 +256,7 @@ function renderQuestionAndAnswers(quizString, question) {
 }
 
 
-function renderEndScoreScreen() {
+function renderEndScoreScreen(quizString) {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <img src="img/brain-result.png" class="w-50 mb-5">
@@ -257,13 +265,10 @@ function renderEndScoreScreen() {
                 <span class="score-color fw-bold">DEIN SCORE </span>
                 <span><b id="right-answer-score"></b>/<b id="max-amount-questions-score"></b></span>
             </p>
-            <p class="card-text rubik">Wähle links ein weiters Quiz aus.</p>
+            <button id="next-question" onclick="restartQuiz('${quizString}')" class="btn btn-primary ps-3 pe-3 mb-4 d-flex align-items-center radius-left radius-right">
+                <span>Erneut spielen</span>
+            </button>
+            <p class="card-text rubik">Oder wähle links ein weiters Quiz aus.</p>
             <img class="position-absolute end-0 h-50" src="img/tropy.png">
         </div>`;
-}
-
-
-function renderWarningOverlay() {
-    return /*html*/`
-    `;
 }
