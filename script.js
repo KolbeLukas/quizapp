@@ -103,12 +103,13 @@ function startHTMLQuiz() {
 
 
 function loadQuestionAndAnswers(quizString, quiz) {
-    if (currentQuestion >= HTMLQuiz.length) {
+    if (currentQuestion >= quiz.length) {
         document.getElementById('quiz-content').innerHTML = renderScoreWindow();
+        document.getElementById('max-amount-questions-score').innerHTML = quiz.length;
     } else {
         let quizdata = quiz[currentQuestion];
         document.getElementById('quiz-content').innerHTML = renderQuestionAndAnswers(quizString, quizdata);
-        document.getElementById('max-amount-questions').innerHTML = HTMLQuiz.length;
+        document.getElementById('max-amount-questions').innerHTML = quiz.length;
         document.getElementById('current-question-number').innerHTML = currentQuestion + 1;
     }
 }
@@ -142,7 +143,7 @@ function renderHTMLQuizStart() {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
             <h4 class="card-title text-center fw-bold pt-sans">Das HTML Quiz</h4>
-            <p class="card-text pt-sans">Bist du bereit 10 interessante Fragen?</p>
+            <p class="card-text text-center pt-sans">Bist du bereit 10 interessante Fragen?</p>
         </div>
         <div class="w-100 d-flex justify-content-end pb-5 pe-5">
             <button onclick="startHTMLQuiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
@@ -194,12 +195,13 @@ function renderQuestionAndAnswers(quizString, question) {
 function renderScoreWindow() {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-            <img src="img/brain-result.png" class="w-50 mb-4">
-            <h4 class="card-title text-center fw-bold rubik w-50 mb-4">COMPLETE HTML QUIZ</h4>
+            <img src="img/brain-result.png" class="w-50 mb-5">
+            <h4 class="card-title text-center fw-bold rubik w-50 mb-5">COMPLETE HTML QUIZ</h4>
             <p class="card-text fw-bold fs-5 rubik d-flex justify-content-between w-75">
-                <span class="score-color">DEIN SCORE </span>
-                <span>10/10</span>
+                <span class="score-color fw-bold">DEIN SCORE </span>
+                <span><b>10</b>/<b id="max-amount-questions-score"></b></span>
             </p>
             <p class="card-text rubik">Wähle links ein weiters Quiz aus.</p>
+            <img class="position-absolute end-0 h-50" src="img/tropy.png">
         </div>`;
 }
