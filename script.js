@@ -82,6 +82,113 @@ let HTMLQuiz = [
 ];
 
 
+let marvelQuiz = [
+    {
+        'question': 'Welche Automarke wird prominent in „Iron Man“ gefahren?',
+        'answer-1': 'Audi',
+        'answer-2': 'Mercedes Benz',
+        'answer-3': 'Volvo',
+        'answer-4': 'Volkswagen',
+        'right-answer': 1
+    },
+    {
+        'question': 'Wie heißt der mutierte Widersacher von „Der unglaubliche Hulk“?',
+        'answer-1': 'Abomination',
+        'answer-2': 'Red Hulk',
+        'answer-3': 'The Thing',
+        'answer-4': 'Kraven',
+        'right-answer': 1
+    },{
+        'question': 'Welchen Alias verwendet Natasha Romanoff als Tony Starks Assistentin in „Iron Man 2“?',
+        'answer-1': 'Black Mamba',
+        'answer-2': 'Gwen Stacy',
+        'answer-3': 'Evelyn Potts',
+        'answer-4': 'Nathalie Rushman',
+        'right-answer': 4
+    },
+    {
+        'question': '„Thor“: In welchem US-Bundesstaat stranden Thor und sein Hammer Mjölnir?',
+        'answer-1': 'Hawaii',
+        'answer-2': 'Nebraska',
+        'answer-3': 'New Mexico',
+        'answer-4': 'Washington',
+        'right-answer': 3
+    },
+    {
+        'question': 'Wie lautet Buckys vollständiger Name, den wir in „Captain America: The First Avenger“ hören?',
+        'answer-1': 'Ed Brubaker Barnes',
+        'answer-2': 'James Buchanan Barnes',
+        'answer-3': 'Stanley Barnes',
+        'answer-4': 'Scott Wright Barnes',
+        'right-answer': 2
+    },
+    {
+        'question': '„Avengers“: An welchem Ort fand die Mission von Clint und Natasha statt, an die sie sich stets anders erinnern?',
+        'answer-1': 'Budapest, Ungarn',
+        'answer-2': 'Brüssel, Belgien',
+        'answer-3': 'Prag, Tschechien',
+        'answer-4': 'Helsinki, Finnland',
+        'right-answer': 1
+    },
+    {
+        'question': 'Wem erzählt Tony Stark die Handlung von „Iron Man 3“ in dessen Post-Credit-Szene?',
+        'answer-1': 'Steve Rogers',
+        'answer-2': 'Thor',
+        'answer-3': 'Bruce Banner',
+        'answer-4': 'Nick Fury',
+        'right-answer': 3
+    },
+    {
+        'question': 'Der Äther, den wir in „Thor 2: The Dark Kingdom“ erstmals gesehen haben, ist die flüssige Form welches Infinity-Steins?',
+        'answer-1': 'Der Realitätsstein',
+        'answer-2': 'Der Seelenstein',
+        'answer-3': 'Der Machtstein',
+        'answer-4': 'Der Gedankenstein',
+        'right-answer': 1
+    },
+    {
+        'question': '„The Return of the Winter Soldier“: Was erschien NICHT in Steve Rogers Liste von Dingen, über die er noch etwas lernen muss?',
+        'answer-1': 'Thai Essen',
+        'answer-2': 'Star Wars / Trek',
+        'answer-3': 'Nirvana (Band)',
+        'answer-4': '11. September 2001',
+        'right-answer': 4
+    },
+    {
+        'question': 'Welchen Spitznamen bekommt der Hulkbuster in „Avengers 2: Age of Ultron“?',
+        'answer-1': 'Bannersmasher',
+        'answer-2': 'Veronica',
+        'answer-3': 'Science Brother',
+        'answer-4': 'Mechanic Hulk',
+        'right-answer': 2
+    },
+    {
+        'question': 'Wie heißt Scott Langs Tochter in „Ant-Man“?',
+        'answer-1': 'Barbara',
+        'answer-2': 'Cassie',
+        'answer-3': 'Morgan',
+        'answer-4': 'Mary-Jane',
+        'right-answer': 2
+    },
+    {
+        'question': 'An welchem deutschen Flughafen bekämpfen sich die Avengers in „The First Avenger: Civil War“?',
+        'answer-1': 'Köln/Bonn',
+        'answer-2': 'Frankfurt am Main',
+        'answer-3': 'Leipzig/Halle',
+        'answer-4': 'Berlin Schönefeld',
+        'right-answer': 3
+    },
+    {
+        'question': 'Wie heißt die K.I. im Anzug von Spider-Man in „Spider-Man: Homecoming“?',
+        'answer-1': 'Hallie',
+        'answer-2': 'Sarah',
+        'answer-3': 'Karen',
+        'answer-4': 'May',
+        'right-answer': 3
+    },
+];
+
+
 let currentQuestion = 0;
 let rightAnswers = 0;
 let audioRightAnswer = new Audio('audio/success.wav');
@@ -92,9 +199,13 @@ let audioWrongAnswer = new Audio('audio/wrong.wav');
 
 function loadHTMLQuizStart() {
     let quizNotStarted = (currentQuestion == 0);
+    let quiz = 'HTML';
+    let length = HTMLQuiz.length;
+
+    resetQuizLinks();
     if (quizNotStarted) {
         setHTMLLinkActive();
-        document.getElementById('quiz-content').innerHTML = renderHTMLQuizStart();
+        document.getElementById('quiz-content').innerHTML = renderQuizStart(quiz, length);
     } else {
         // open reset alert
         document.getElementById('alert').classList.remove('d-none');
@@ -131,12 +242,58 @@ function endHTMLQuiz() {
 }
 
 
+/* MARVEL-QUIZ FUNCTIONS */
+
+function loadMarvelQuizStart() {
+    let quizNotStarted = (currentQuestion == 0);
+    let quiz = 'Marvel';
+    let length = marvelQuiz.length;
+
+    resetQuizLinks();
+    if (quizNotStarted) {
+        setMarvelLinkActive();
+        document.getElementById('quiz-content').innerHTML = renderQuizStart(quiz, length);
+    } else {
+        // open reset alert
+        document.getElementById('alert').classList.remove('d-none');
+        document.getElementById('end-quiz').setAttribute('onclick','endMarvelQuiz()');
+        document.getElementById('move-on').setAttribute('onclick','closeAlert()');
+    }
+}
+
+
+function setMarvelLinkActive (){
+    document.getElementById('marvel-quiz-link-box').classList.add('active');
+    document.getElementById('marvel-quiz-link-box').classList.remove('inactive');
+    document.getElementById('marvel-quiz-link').classList.remove('fw-light');
+}
+
+
+function startMarvelQuiz() {
+    let quizString = 'marvelQuiz';
+    let quiz = marvelQuiz;
+
+    currentQuestion = 0;
+    rightAnswers = 0;
+    document.getElementById('quiz-content').classList.remove('main-bg');
+    loadQuestionAndAnswers(quizString, quiz);
+}
+
+
+function endMarvelQuiz() {
+    currentQuestion = 0;
+    rightAnswers = 0;
+    loadMarvelQuizStart();
+    document.getElementById('alert').classList.add('d-none');
+    resetProgressBar();
+}
+
 /* FUNCTIONS FOR ALL QUIZ */
 
 function loadQuestionAndAnswers(quizString, quiz) {
     let progress = Math.round((currentQuestion / quiz.length) * 100);
     let quizdata = quiz[currentQuestion];
-    
+
     if (currentQuestion >= quiz.length) {
         showEndScreen(quizString, quiz);
         updateProgressBar(progress);
@@ -222,16 +379,24 @@ function restartQuiz(quizString) {
 }
 
 
+function resetQuizLinks() {
+    document.getElementById('html-quiz-link-box').classList.remove('active');
+    document.getElementById('html-quiz-link-box').classList.add('inactive');
+    document.getElementById('marvel-quiz-link-box').classList.remove('active');
+    document.getElementById('marvel-quiz-link-box').classList.add('inactive');
+}
+
+
 /* HTML Rendering */
 
-function renderHTMLQuizStart() {
+function renderQuizStart(quiz, length) {
     return /*html*/`
         <div class="card-body d-flex flex-column justify-content-center align-items-center mw-50">
-            <h4 class="card-title text-center fw-bold pt-sans">Das HTML Quiz</h4>
-            <p class="card-text text-center pt-sans">Bist du bereit 10 interessante Fragen?</p>
+            <h4 class="card-title text-center fw-bold pt-sans">Das ${quiz} Quiz</h4>
+            <p class="card-text text-center pt-sans">Bist du bereit ${length} interessante Fragen?</p>
         </div>
         <div class="w-100 d-flex justify-content-end pb-5 pe-5">
-            <button onclick="startHTMLQuiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
+            <button onclick="start${quiz}Quiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
                 <span class="pe-3">LOS GEHT'S</span>
                 <img src="img/next.png">
             </button>
