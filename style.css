@@ -32,6 +32,10 @@
     background-position: center;
 }
 
+.radius {
+    border-radius: 10px;
+}
+
 .radius-right {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -53,6 +57,10 @@ body {
 
 .nav-left {
     background-color: rgb(39, 53, 92);
+}
+
+.container {
+    padding: 0;
 }
 
 .btn-primary {
@@ -129,4 +137,86 @@ a {
 
 .score-color {
     color: rgb(225, 138, 69);
+}
+
+.resp-menu-button {
+    display: none;
+    cursor: pointer;
+}
+
+.resp-menu-button:hover {
+    background-color: rgb(64, 81, 128);
+}
+
+.resp-menu {
+    top: 40px;
+    right: 0;
+    background-color: rgb(39, 53, 92);
+}
+
+.z-i-100 {
+    z-index: 100;
+}
+
+@media (max-width: 991px) {
+    #tropy {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-left {
+        display: flex;
+        height: 15%;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    #quiz-content {
+        height: 85%;
+    }
+
+    .radius-left {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 10px;
+    }
+
+    .radius-right {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 10px;
+    }
+
+    .nav-resp {
+        justify-content: space-around !important;
+        width: 100%;
+    }
+
+    .resp-menu-button {
+        display: block;
+    }
+
+    .h-75 {
+        height: 100% !important;
+    }
+
+    .mh-600 {
+        max-height: 100%;
+    }
+
+    .py-3 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .mt-2 {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 600px) {
+    h4 {
+        font-size: 19px;
+    }
 }

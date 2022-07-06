@@ -98,7 +98,7 @@ let marvelQuiz = [
         'answer-3': 'The Thing',
         'answer-4': 'Kraven',
         'right-answer': 1
-    },{
+    }, {
         'question': 'Welchen Alias verwendet Natasha Romanoff als Tony Starks Assistentin in „Iron Man 2“?',
         'answer-1': 'Black Mamba',
         'answer-2': 'Gwen Stacy',
@@ -202,20 +202,21 @@ function loadHTMLQuizStart() {
     let quiz = 'HTML';
     let length = HTMLQuiz.length;
 
-    resetQuizLinks();
     if (quizNotStarted) {
+        resetQuizLinks();
         setHTMLLinkActive();
         document.getElementById('quiz-content').innerHTML = renderQuizStart(quiz, length);
     } else {
         // open reset alert
         document.getElementById('alert').classList.remove('d-none');
-        document.getElementById('end-quiz').setAttribute('onclick','endHTMLQuiz()');
-        document.getElementById('move-on').setAttribute('onclick','closeAlert()');
+        document.getElementById('end-quiz').setAttribute('onclick', 'endHTMLQuiz()');
+        document.getElementById('move-on').setAttribute('onclick', 'closeAlert()');
     }
+    openOrCloseMenu();
 }
 
 
-function setHTMLLinkActive (){
+function setHTMLLinkActive() {
     document.getElementById('html-quiz-link-box').classList.add('active');
     document.getElementById('html-quiz-link-box').classList.remove('inactive');
     document.getElementById('html-quiz-link').classList.remove('fw-light');
@@ -236,6 +237,7 @@ function startHTMLQuiz() {
 function endHTMLQuiz() {
     currentQuestion = 0;
     rightAnswers = 0;
+    openOrCloseMenu();
     loadHTMLQuizStart();
     document.getElementById('alert').classList.add('d-none');
     resetProgressBar();
@@ -249,20 +251,21 @@ function loadMarvelQuizStart() {
     let quiz = 'Marvel';
     let length = marvelQuiz.length;
 
-    resetQuizLinks();
     if (quizNotStarted) {
+        resetQuizLinks();
         setMarvelLinkActive();
         document.getElementById('quiz-content').innerHTML = renderQuizStart(quiz, length);
     } else {
         // open reset alert
         document.getElementById('alert').classList.remove('d-none');
-        document.getElementById('end-quiz').setAttribute('onclick','endMarvelQuiz()');
-        document.getElementById('move-on').setAttribute('onclick','closeAlert()');
+        document.getElementById('end-quiz').setAttribute('onclick', 'endMarvelQuiz()');
+        document.getElementById('move-on').setAttribute('onclick', 'closeAlert()');
     }
+    openOrCloseMenu();
 }
 
 
-function setMarvelLinkActive (){
+function setMarvelLinkActive() {
     document.getElementById('marvel-quiz-link-box').classList.add('active');
     document.getElementById('marvel-quiz-link-box').classList.remove('inactive');
     document.getElementById('marvel-quiz-link').classList.remove('fw-light');
@@ -283,6 +286,7 @@ function startMarvelQuiz() {
 function endMarvelQuiz() {
     currentQuestion = 0;
     rightAnswers = 0;
+    openOrCloseMenu();
     loadMarvelQuizStart();
     document.getElementById('alert').classList.add('d-none');
     resetProgressBar();
@@ -387,6 +391,23 @@ function resetQuizLinks() {
 }
 
 
+function openOrCloseMenu() {
+    let menu = document.getElementById('nav');
+
+    if (matchMedia('(max-width: 767px)').matches) {
+        if (menu.style.position === 'absolute') {
+            menu.style.position = 'unset';
+            menu.classList.remove('d-flex');
+            menu.classList.remove('resp-menu');
+        } else {
+            menu.style.position = 'absolute';
+            menu.classList.add('d-flex');
+            menu.classList.add('resp-menu');
+        }
+    }
+}
+
+
 /* HTML Rendering */
 
 function renderQuizStart(quiz, length) {
@@ -396,7 +417,7 @@ function renderQuizStart(quiz, length) {
             <p class="card-text text-center pt-sans">Bist du bereit ${length} interessante Fragen?</p>
         </div>
         <div class="w-100 d-flex justify-content-end pb-5 pe-5">
-            <button onclick="start${quiz}Quiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius-left radius-right">
+            <button onclick="start${quiz}Quiz()" class="btn btn-primary ps-4 pe-3 d-flex align-items-center radius">
                 <span class="pe-3">LOS GEHT'S</span>
                 <img src="img/next.png">
             </button>
@@ -434,7 +455,7 @@ function renderQuestionAndAnswers(quizString, question) {
             </div>
             <div class="d-flex justify-content-between align-items-center w-75">
                 <span><b id="current-question-number"></b> von <b id="max-amount-questions"></b> Fragen</span>
-                <button id="next-question" onclick="nextQuestion('${quizString}')" class="btn btn-primary ps-3 pe-3 d-flex align-items-center radius-left radius-right" disabled>
+                <button id="next-question" onclick="nextQuestion('${quizString}')" class="btn btn-primary ps-3 pe-3 d-flex align-items-center radius" disabled>
                 <span>Nächste Frage</span>
                 </button>
             </div>
@@ -451,10 +472,10 @@ function renderEndScoreScreen(quizString) {
                 <span class="score-color fw-bold">DEIN SCORE </span>
                 <span><b id="right-answer-score"></b>/<b id="max-amount-questions-score"></b></span>
             </p>
-            <button id="next-question" onclick="restartQuiz('${quizString}')" class="btn btn-primary ps-3 pe-3 mb-4 d-flex align-items-center radius-left radius-right">
+            <button id="next-question" onclick="restartQuiz('${quizString}')" class="btn btn-primary ps-3 pe-3 mb-4 d-flex align-items-center radius">
                 <span>Erneut spielen</span>
             </button>
             <p class="card-text rubik">Oder wähle links ein weiters Quiz aus.</p>
-            <img class="position-absolute end-0 h-50" src="img/tropy.png">
+            <img id="tropy" class="position-absolute end-0 h-50" src="img/tropy.png">
         </div>`;
 }
