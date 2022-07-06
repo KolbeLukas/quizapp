@@ -453,7 +453,7 @@ function renderQuestionAndAnswers(quizString, question) {
                     <span class="rubik">${question['answer-4']}</span>
                 </div>
             </div>
-            <div class="d-flex justify-content-between align-items-center w-75">
+            <div class="d-flex justify-content-between align-items-center w-75 resp-next">
                 <span><b id="current-question-number"></b> von <b id="max-amount-questions"></b> Fragen</span>
                 <button id="next-question" onclick="nextQuestion('${quizString}')" class="btn btn-primary ps-3 pe-3 d-flex align-items-center radius" disabled>
                 <span>Nächste Frage</span>
@@ -475,7 +475,7 @@ function renderEndScoreScreen(quizString) {
             <button id="next-question" onclick="restartQuiz('${quizString}')" class="btn btn-primary ps-3 pe-3 mb-4 d-flex align-items-center radius">
                 <span>Erneut spielen</span>
             </button>
-            <p class="card-text rubik">Oder wähle links ein weiters Quiz aus.</p>
+            <p class="card-text text-center rubik">Oder wähle links ein weiters Quiz aus.</p>
             <img id="tropy" class="position-absolute end-0 h-50" src="img/tropy.png">
         </div>`;
 }

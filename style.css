@@ -158,6 +158,10 @@ a {
     z-index: 100;
 }
 
+.alert {
+    margin-inline: 2px;
+}
+
 @media (max-width: 991px) {
     #tropy {
         display: none;
@@ -213,10 +217,18 @@ a {
     .mt-2 {
         margin-top: 0 !important;
     }
+
+    .resp-next {
+        flex-direction: column-reverse;
+    }
 }
 
 @media (max-width: 600px) {
     h4 {
         font-size: 19px;
+    }
+    
+    .card-body {
+        padding: 1px;
     }
 }
